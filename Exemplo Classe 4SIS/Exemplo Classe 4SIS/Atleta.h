@@ -8,6 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Atleta : NSObject
+@interface Atleta : NSObject {
+    
+    NSString *nome;
+    int idade;
+    
+}
+
+-(void)setNome:(NSString *)_nome;
+-(NSString *)getNome;
+
+-(void)setIdade:(int)_idade;
+-(int)getIdade;
 
 @end
