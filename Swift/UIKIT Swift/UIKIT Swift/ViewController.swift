@@ -16,6 +16,69 @@ class ViewController: UIViewController {
     @IBOutlet weak var lblKM: UILabel!
     @IBOutlet weak var lblRota: UILabel!
    
+    @IBAction func salvar(_ sender: Any) {
+        var tipo:String
+        var msg:String
+        
+        if meuSegmento.selectedSegmentIndex >= 0 {
+            tipo = meuSegmento.titleForSegment(at: meuSegmento.selectedSegmentIndex)!
+            msg = "O veículo \(tipo) do ano \(lblAno.text) foi salvo com sucesso!"
+        } else {
+            tipo = ""
+            msg = "Antes de salvar escolha seu veículo"
+        }
+        
+        let alerta = UIAlertController(
+            title: "Atenção",
+            message: msg,
+            preferredStyle: UIAlertControllerStyle.alert)
+        
+        alerta.addAction(UIAlertAction(
+            title: "OK",
+            style: UIAlertActionStyle.default,
+            handler: nil
+        ))
+        
+        present(alerta, animated: true, completion: nil)
+    }
+    
+    @IBAction func informarRota(_ sender: Any) {
+        let alerta = UIAlertController(
+            title: "Forma para receber a rota",
+            message: "Faça sua escolha",
+            preferredStyle: UIAlertControllerStyle.actionSheet
+        )
+        
+        alerta.addAction(UIAlertAction(
+            title: "SMS",
+            style: UIAlertActionStyle.default,
+            handler: { (sms) in
+                self.lblRota.text = sms.title
+        }))
+        
+        alerta.addAction(UIAlertAction(
+            title: "E-mail",
+            style: UIAlertActionStyle.default,
+            handler: { (email) in
+                self.lblRota.text = email.title
+        }))
+        
+        alerta.addAction(UIAlertAction(
+            title: "Cancelar",
+            style: UIAlertActionStyle.cancel,
+            handler: nil))
+        
+        present(alerta, animated: true, completion: nil)
+    }
+    
+    @IBAction func switchValueChanged(_ sender: UISwitch) {
+        print(sender.isOn)
+    }
+    
+    @IBAction func sliderValueCahnged(_ sender: UISlider) {
+        lblKM.text = String(Int(sender.value))
+    }
+    
     
     @IBAction func stepperValueChanged(_ sender: Any) {
         lblAno.text = String(Int(meuStepper.value))
